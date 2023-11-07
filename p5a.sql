@@ -1,24 +1,40 @@
-DROP PROCEDURE IF EXISTS proc_Class;
+-- run p5b.sql before this code
+
+-- create table studmarks(
+-- 	`name` varchar(50), 
+-- 	`total_marks` int(10)
+-- ); 
+-- insert into studmarks values ("Anuj",100);
+-- create table result(
+-- 	`roll` int(10),
+-- 	`name` varchar(50), 
+-- 	`class` varchar(50)
+-- );
+-- call procclass(1);
+-- select * from result;
+
 Delimiter //
 
-CREATE PROCEDURE proc_Class(IN new_Roll Integer)
+CREATE PROCEDURE procclass(IN newroll Integer)
 
    BEGIN
-	DECLARE T_Marks INTEGER;
-	DECLARE S_Name varchar(25);
-	DECLARE S_result varchar(25);
+	DECLARE tmarks INTEGER;
+	DECLARE sname varchar(25);
+	DECLARE sresult varchar(25);
 
 	DECLARE EXIT HANDLER FOR NOT FOUND
    BEGIN
-	SELECT CONCAT('ROLLNO ', new_Roll, ' NOT FOUND') as NoRecord;
+	SELECT CONCAT('ROLLNO ', newroll, ' NOT FOUND') as NoRecord;
    END;
-	SELECT Name, Total_Marks INTO S_Name, T_Marks
-	FROM Stud_Marks 
-	WHERE Rollno = new_Roll;
+	SELECT Name, total_marks INTO sname, tmarks
+	FROM studmarks 
+	WHERE roll = newroll;
 
-	SET S_result = Func_Class(T_Marks);
+	SET sresult = funcclass(tmarks);
 
-	INSERT INTO Result values(new_Roll,S_Name,S_result);
+	INSERT INTO result values(newroll,sname,sresult);
 
 END;
 //
+
+delimiter ;

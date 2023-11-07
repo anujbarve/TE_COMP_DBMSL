@@ -1,7 +1,6 @@
-DROP FUNCTION IF EXISTS Func_Class;
 Delimiter //
 
-CREATE FUNCTION Func_Class(Marks Integer)
+CREATE FUNCTION funcclass(Marks Integer)
 RETURNS varchar(25) NO SQL
 
    BEGIN
