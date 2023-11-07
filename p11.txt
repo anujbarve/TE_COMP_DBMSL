@@ -1,0 +1,83 @@
+use te1
+switched to db te1
+> db.employee.insert({Eid : "1",Ename : "Jay", Deptno:10,Salary : 10000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "2",Ename : "Akshay", Deptno:20,Salary : 9000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "3",Ename : "Sanjay", Deptno:20,Salary : 15000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "4",Ename : "Sunil", Deptno:10,Salary : 25000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "5",Ename : "Anil", Deptno:10,Salary : 20000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("5424ac3107796d973eec87f0"),
+        "Eid" : "1",
+        "Ename" : "Jay",
+        "Deptno" : 10,
+        "Salary" : 10000
+}
+{
+        "_id" : ObjectId("5424ac5207796d973eec87f1"),
+        "Eid" : "2",
+        "Ename" : "Akshay",
+        "Deptno" : 20,
+        "Salary" : 9000
+}
+{
+        "_id" : ObjectId("5424ac6c07796d973eec87f2"),
+        "Eid" : "3",
+        "Ename" : "Sanjay",
+        "Deptno" : 20,
+        "Salary" : 15000
+}
+{
+        "_id" : ObjectId("5424ac8507796d973eec87f3"),
+        "Eid" : "4",
+        "Ename" : "Sunil",
+        "Deptno" : 10,
+        "Salary" : 25000
+}
+{
+        "_id" : ObjectId("5424ac9807796d973eec87f4"),
+        "Eid" : "5",
+        "Ename" : "Anil",
+        "Deptno" : 10,
+        "Salary" : 20000
+}
+>
+> var MapFunction=function()
+   {
+        emit(this.Deptno,this.Salary)
+   }
+> var reducefunction=function(key,values) 
+  { 
+    return Array.sum(values)
+  }
+>
+> db.employee.mapReduce(MapFunction,reducefunction,{"out" : "empMR"})
+{
+        "result" : "empMR",
+        "timeMillis" : 269,
+        "counts" : {
+                "input" : 5,
+                "emit" : 5,
+                "reduce" : 2,
+                "output" : 2
+        },
+        "ok" : 1,
+}
+>
+> db.empMR.find().pretty()
+{ "_id" : 10, "value" : 55000 }
+{ "_id" : 20, "value" : 24000 }
+>
+>
+> db.empMR.find({"_id" : 10}).pretty()
+{ "_id" : 10, "value" : 55000 }
+>
+> db.empMR.find({"_id" : 20}).pretty()
+{ "_id" : 20, "value" : 24000 }
+>
+>

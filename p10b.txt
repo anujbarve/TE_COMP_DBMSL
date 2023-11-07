@@ -1,0 +1,97 @@
+db.employee.getIndexes()
+[
+        {
+                "v" : 1,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "te1.employee"
+        }
+]
+> db.employee.ensureIndex({Eid:1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> db.employee.getIndexes()
+[
+        {
+                "v" : 1,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "te1.employee"
+        },
+        {
+                "v" : 1,
+                "key" : {
+                        "Eid" : 1
+                },
+                "name" : "Eid_1",
+                "ns" : "te1.employee"
+        }
+]
+>
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("5424ac3107796d973eec87f0"),
+        "Eid" : "1",
+        "Ename" : "Jay",
+        "Deptno" : 10,
+        "Salary" : 10000
+}
+{
+        "_id" : ObjectId("5424ac5207796d973eec87f1"),
+        "Eid" : "2",
+        "Ename" : "Akshay",
+        "Deptno" : 20,
+        "Salary" : 9000
+}
+{
+        "_id" : ObjectId("5424ac6c07796d973eec87f2"),
+        "Eid" : "3",
+        "Ename" : "Sanjay",
+        "Deptno" : 20,
+        "Salary" : 15000
+}
+{
+        "_id" : ObjectId("5424ac8507796d973eec87f3"),
+        "Eid" : "4",
+        "Ename" : "Sunil",
+        "Deptno" : 10,
+        "Salary" : 25000
+}
+{
+        "_id" : ObjectId("5424ac9807796d973eec87f4"),
+        "Eid" : "5",
+        "Ename" : "Anil",
+        "Deptno" : 10,
+        "Salary" : 20000
+}
+{
+        "_id" : ObjectId("5424acad07796d973eec87f5"),
+        "Eid" : "6",
+        "Ename" : "Rajesh",
+        "Deptno" : 20,
+        "Salary" : 21000
+}
+>
+> db.employee.dropIndex({Eid : 1})
+{ "nIndexesWas" : 2, "ok" : 1 }
+>
+> db.employee.getIndexes()
+[
+        {
+                "v" : 1,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "te1.employee"
+        }
+]
+>

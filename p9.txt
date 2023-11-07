@@ -1,0 +1,147 @@
+ use te1
+switched to db te1
+> db.employee.insert({Eid : "1",Ename : "Jay", Deptno:10,Salary : 10000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "2",Ename : "Akshay", Deptno:20,Salary : 9000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "3",Ename : "Sanjay", Deptno:20,Salary : 15000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "4",Ename : "Sunil", Deptno:10,Salary : 25000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "5",Ename : "Anil", Deptno:10,Salary : 20000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({Eid : "6",Ename : "Rajesh", Deptno:20,Salary : 21000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("5424ac3107796d973eec87f0"),
+        "Eid" : "1",
+        "Ename" : "Jay",
+        "Deptno" : 10,
+        "Salary" : 10000
+}
+{
+        "_id" : ObjectId("5424ac5207796d973eec87f1"),
+        "Eid" : "2",
+        "Ename" : "Akshay",
+        "Deptno" : 20,
+        "Salary" : 9000
+}
+{
+        "_id" : ObjectId("5424ac6c07796d973eec87f2"),
+        "Eid" : "3",
+        "Ename" : "Sanjay",
+        "Deptno" : 20,
+        "Salary" : 15000
+}
+{
+        "_id" : ObjectId("5424ac8507796d973eec87f3"),
+        "Eid" : "4",
+        "Ename" : "Sunil",
+        "Deptno" : 10,
+        "Salary" : 25000
+}
+{
+        "_id" : ObjectId("5424ac9807796d973eec87f4"),
+        "Eid" : "5",
+        "Ename" : "Anil",
+        "Deptno" : 10,
+        "Salary" : 20000
+}
+{
+        "_id" : ObjectId("5424acad07796d973eec87f5"),
+        "Eid" : "6",
+        "Ename" : "Rajesh",
+        "Deptno" : 20,
+        "Salary" : 21000
+}
+> db.employee.update({Ename : "Jay"}, {$set : {Ename : "Viru"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("5424ac3107796d973eec87f0"),
+        "Eid" : "1",
+        "Ename" : "Viru",
+        "Deptno" : 10,
+        "Salary" : 10000
+}
+{
+        "_id" : ObjectId("5424ac5207796d973eec87f1"),
+        "Eid" : "2",
+        "Ename" : "Akshay",
+        "Deptno" : 20,
+        "Salary" : 9000
+}
+{
+        "_id" : ObjectId("5424ac6c07796d973eec87f2"),
+        "Eid" : "3",
+        "Ename" : "Sanjay",
+        "Deptno" : 20,
+        "Salary" : 15000
+}
+{
+        "_id" : ObjectId("5424ac8507796d973eec87f3"),
+        "Eid" : "4",
+        "Ename" : "Sunil",
+        "Deptno" : 10,
+        "Salary" : 25000
+}
+{
+        "_id" : ObjectId("5424ac9807796d973eec87f4"),
+        "Eid" : "5",
+        "Ename" : "Anil",
+        "Deptno" : 10,
+        "Salary" : 20000
+}
+{
+        "_id" : ObjectId("5424acad07796d973eec87f5"),
+        "Eid" : "6",
+        "Ename" : "Rajesh",
+        "Deptno" : 20,
+        "Salary" : 21000
+}
+>
+> db.employee.find().limit(4)
+{ "_id" : ObjectId("5424ac3107796d973eec87f0"), "Eid" : "1", "Ename" : "Viru", "Deptno" : 10, "Salary" : 10000 }
+{ "_id" : ObjectId("5424ac5207796d973eec87f1"), "Eid" : "2", "Ename" : "Akshay", "Deptno" : 20, "Salary" : 9000 }
+{ "_id" : ObjectId("5424ac6c07796d973eec87f2"), "Eid" : "3", "Ename" : "Sanjay", "Deptno" : 20, "Salary" : 15000 }
+{ "_id" : ObjectId("5424ac8507796d973eec87f3"), "Eid" : "4", "Ename" : "Sunil", "Deptno" : 10, "Salary" : 25000 }
+>
+> db.employee.find().skip(2)
+{ "_id" : ObjectId("5424ac6c07796d973eec87f2"), "Eid" : "3", "Ename" : "Sanjay", "Deptno" : 20, "Salary" : 15000 }
+{ "_id" : ObjectId("5424ac8507796d973eec87f3"), "Eid" : "4", "Ename" : "Sunil","Deptno" : 10, "Salary" : 25000 }
+{ "_id" : ObjectId("5424ac9807796d973eec87f4"), "Eid" : "5", "Ename" : "Anil", "Deptno" : 10, "Salary" : 20000 }
+{ "_id" : ObjectId("5424acad07796d973eec87f5"), "Eid" : "6", "Ename" : "Rajesh", "Deptno" : 20, "Salary" : 21000 }
+>
+> db.employee.find({Deptno : 20})
+{ "_id" : ObjectId("5424ac5207796d973eec87f1"), "Eid" : "2", "Ename" : "Akshay", "Deptno" : 20, "Salary" : 9000 }
+{ "_id" : ObjectId("5424ac6c07796d973eec87f2"), "Eid" : "3", "Ename" : "Sanjay", "Deptno" : 20, "Salary" : 15000 }
+{ "_id" : ObjectId("5424acad07796d973eec87f5"), "Eid" : "6", "Ename" : "Rajesh", "Deptno" : 20, "Salary" : 21000 }
+>
+> db.employee.find({Salary : { $gt:4000,$lte:21000}})
+{ "_id" : ObjectId("5424ac3107796d973eec87f0"), "Eid" : "1", "Ename" : "Viru", "Deptno" : 10, "Salary" : 10000 }
+{ "_id" : ObjectId("5424ac5207796d973eec87f1"), "Eid" : "2", "Ename" : "Akshay", "Deptno" : 20, "Salary" : 9000 }
+{ "_id" : ObjectId("5424ac6c07796d973eec87f2"), "Eid" : "3", "Ename" : "Sanjay", "Deptno" : 20, "Salary" : 15000 }
+{ "_id" : ObjectId("5424ac9807796d973eec87f4"), "Eid" : "5", "Ename" : "Anil", "Deptno" : 10, "Salary" : 20000 }
+{ "_id" : ObjectId("5424acad07796d973eec87f5"), "Eid" : "6", "Ename" : "Rajesh", "Deptno" : 20, "Salary" : 21000 }
+>
+> db.employee.find({Ename : { $in:["Viru"]}})
+{ "_id" : ObjectId("5424ac3107796d973eec87f0"), "Eid" : "1", "Ename" : "Viru", "Deptno" : 10, "Salary" : 10000 }
+>
+> db.employee.find({Ename : { $nin:["Viru"]}})
+{ "_id" : ObjectId("5424ac5207796d973eec87f1"), "Eid" : "2", "Ename" : "Akshay", "Deptno" : 20, "Salary" : 9000 }
+{ "_id" : ObjectId("5424ac6c07796d973eec87f2"), "Eid" : "3", "Ename" : "Sanjay", "Deptno" : 20, "Salary" : 15000 }
+{ "_id" : ObjectId("5424ac8507796d973eec87f3"), "Eid" : "4", "Ename" : "Sunil","Deptno" : 10, "Salary" : 25000 }
+{ "_id" : ObjectId("5424ac9807796d973eec87f4"), "Eid" : "5", "Ename" : "Anil", "Deptno" : 10, "Salary" : 20000 }
+{ "_id" : ObjectId("5424acad07796d973eec87f5"), "Eid" : "6", "Ename" : "Rajesh", "Deptno" : 20, "Salary" : 21000 }
+>
+> db.employee.remove({Ename : "Rajesh"})
+WriteResult({ "nRemoved" : 1 })
+>
+> db.employee.find()
+{ "_id" : ObjectId("5424ac3107796d973eec87f0"), "Eid" : "1", "Ename" : "Viru", "Deptno" : 10, "Salary" : 10000 }
+{ "_id" : ObjectId("5424ac5207796d973eec87f1"), "Eid" : "2", "Ename" : "Akshay", "Deptno" : 20, "Salary" : 9000 }
+{ "_id" : ObjectId("5424ac6c07796d973eec87f2"), "Eid" : "3", "Ename" : "Sanjay", "Deptno" : 20, "Salary" : 15000 }
+{ "_id" : ObjectId("5424ac8507796d973eec87f3"), "Eid" : "4", "Ename" : "Sunil","Deptno" : 10, "Salary" : 25000 }
+{ "_id" : ObjectId("5424ac9807796d973eec87f4"), "Eid" : "5", "Ename" : "Anil", "Deptno" : 10, "Salary" : 20000 }
+>
