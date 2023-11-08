@@ -1,25 +1,36 @@
+create table student(
+    `rollno` int(10),
+    `name` varchar(50)
+);
+insert into student values(1,"Anuj");
+create table nstudent(
+    `rollno` int(10),
+    `name` varchar(50)
+);
+
+
 DELIMITER //
 
-CREATE PROCEDURE merge_Data(IN newRollno INTEGER)
+CREATE PROCEDURE merge_Data(IN newrollno INTEGER)
 
 BEGIN
-    DECLARE S_Roll INTEGER;
-    DECLARE row_Count INTEGER DEFAULT 0;
+    DECLARE sroll INTEGER;
+    DECLARE rowcount INTEGER DEFAULT 0;
 
     DECLARE terminate BOOLEAN DEFAULT FALSE;
 
-    DECLARE Stud_detail CURSOR FOR 
-    SELECT Rollno FROM student WHERE Rollno = newRollno;
+    DECLARE studdetail CURSOR FOR 
+    SELECT rollno FROM student WHERE rollno = newrollno;
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET terminate = TRUE;
     
-    OPEN Stud_detail;
+    OPEN studdetail;
 
     getStud: LOOP
-       FETCH Stud_detail INTO S_Roll;
-       IF NOT EXISTS (SELECT * FROM n_Student WHERE Rollno = S_Roll) Then
-	 INSERT INTO n_Student SELECT * FROM student WHERE Rollno=S_Roll;
-         SET row_Count = row_Count + 1;
+       FETCH studdetail INTO sroll;
+       IF NOT EXISTS (SELECT * FROM nstudent WHERE rollno = sroll) Then
+	 INSERT INTO nstudent SELECT * FROM student WHERE rollno=sroll;
+         SET rowcount = rowcount + 1;
        END IF;
 
        IF terminate = TRUE THEN
@@ -27,7 +38,7 @@ BEGIN
        END IF;
        
     END LOOP getStud;
-    CLOSE Stud_detail;
-    SELECT CONCAT('RECORDS MERGED,',row_Count,' row(s) affected') AS Message;
+    CLOSE studdetail;
+    SELECT CONCAT('RECORDS MERGED,',rowcount,' row(s) affected') AS Message;
 END//
 DELIMITER ;

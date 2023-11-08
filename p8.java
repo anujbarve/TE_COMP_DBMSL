@@ -10,7 +10,7 @@ public class p8 {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 	      // variables
-	      final String url = "jdbc:mysql:///DBMSLC";
+	      final String url = "jdbc:mysql://localhost:3306/dbname";
 	      final String user = "root";
 	      final String password = "root";
 	      	      // establish the connection
